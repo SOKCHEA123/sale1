@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>វេបសាយញែកភាសា</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Khmer OS System', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: #f1c40f;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #3498db;
+        }
+        
+        .intro h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .intro p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        
+        .language-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .language-option {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .language-option h3 {
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        .language-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+        
+        .language-select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .separator-container {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .separator-line {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #3498db, transparent);
+            margin: 2rem 0;
+        }
+        
+        .separator-text {
+            background-color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            color: #2c3e50;
+            font-weight: bold;
+            border: 2px solid #3498db;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .text-areas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .text-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid #2ecc71;
+        }
+        
+        .text-container:nth-child(2) {
+            border-top-color: #e74c3c;
+        }
+        
+        .text-container h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .language-indicator {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: #3498db;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+        
+        .text-container:nth-child(2) .language-indicator {
+            background-color: #e74c3c;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.8rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 200px;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #d68910;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(243, 156, 18, 0.3);
+        }
+        
+        .features {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .features h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid #3498db;
+        }
+        
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .warning-message {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        .warning-message.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .text-areas {
+                flex-direction: column;
+            }
+            
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-language"></i>
+        </div>
+        <h1>វេបសាយញែកភាសា</h1>
+        <p class="subtitle">ឧបករណ៍សម្រាប់ញែកភាសាផ្សេងៗចេញពីគ្នា ដោយហាមជាន់គ្នា ដើម្បីរក្សាភាពសុទ្ធនៃភាសានីមួយៗ</p>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <h2><i class="fas fa-info-circle"></i> អំពីវេបសាយនេះ</h2>
+            <p>វេបសាយនេះត្រូវបានបង្កើតឡើងដើម្បីជួយញែកភាសាផ្សេងៗចេញពីគ្នា ដោយហាមជាន់គ្នា។ នេះជាការសំខាន់ណាស់ដើម្បីរក្សាភាពសុទ្ធនៃភាសានីមួយៗ និងជៀសវាងការលាយបញ្ចូលគ្នានៃពាក្យពីភាសាផ្សេងៗក្នុងឯកសារតែមួយ។</p>
+            <p>អ្នកអាចជ្រើសរើសភាសាពីរផ្សេងគ្នា ហើយបញ្ជាក់ថាតើភាសាណាមួយមិនត្រូវបញ្ចូលក្នុងផ្នែករបស់ភាសាមួយទៀតទេ។</p>
+        </section>
+        
+        <div class="language-controls">
+            <div class="language-option">
+                <h3><i class="fas fa-flag"></i> ភាសាទីមួយ</h3>
+                <select id="language1" class="language-select">
+                    <option value="khmer">ភាសាខ្មែរ</option>
+                    <option value="english">ភាសាអង់គ្លេស</option>
+                    <option value="french">ភាសាបារាំង</option>
+                    <option value="spanish">ភាសាអេស្បាញ</option>
+                    <option value="chinese">ភាសាចិន</option>
+                    <option value="japanese">ភាសាជប៉ុន</option>
+                    <option value="korean">ភាសាកូរ៉េ</option>
+                    <option value="thai">ភាសាថៃ</option>
+                </select>
+            </div>
+            
+            <div class="language-option">
+                <h3><i class="fas fa-flag"></i> ភាសាទីពីរ</h3>
+                <select id="language2" class="language-select">
+                    <option value="english">ភាសាអង់គ្លេស</option>
+                    <option value="khmer">ភាសាខ្មែរ</option>
+                    <option value="french">ភាសាបារាំង</option>
+                    <option value="spanish">ភាសាអេស្បាញ</option>
+                    <option value="chinese">ភាសាចិន</option>
+                    <option value="japanese">ភាសាជប៉ុន</option>
+                    <option value="korean">ភាសាកូរ៉េ</option>
+                    <option value="thai">ភាសាថៃ</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="separator-container">
+            <div class="separator-line"></div>
+            <div class="separator-text">ផ្នែកដាច់ដោយឡែក</div>
+            <div class="separator-line"></div>
+        </div>
+        
+        <div class="text-areas">
+            <div class="text-container">
+                <h3><span id="lang1-name">ភាសាខ្មែរ</span> <span class="language-indicator" id="lang1-code">ខ្មែរ</span></h3>
+                <textarea id="text1" placeholder="សូមវាយបញ្ចូលអត្ថបទជាភាសាខ្មែរនៅទីនេះ..."></textarea>
+                <div class="stats">
+                    <span id="count1">0 ពាក្យ</span>
+                    <span id="purity1">សុទ្ធភាព: 100%</span>
+                </div>
+            </div>
+            
+            <div class="text-container">
+                <h3><span id="lang2-name">ភាសាអង់គ្លេស</span> <span class="language-indicator" id="lang2-code">ENG</span></h3>
+                <textarea id="text2" placeholder="សូមវាយបញ្ចូលអត្ថបទជាភាសាអង់គ្លេសនៅទីនេះ..."></textarea>
+                <div class="stats">
+                    <span id="count2">0 ពាក្យ</span>
+                    <span id="purity2">សុទ្ធភាព: 100%</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="warningMessage" class="warning-message">
+            <i class="fas fa-exclamation-triangle"></i> <strong>ការព្រមាន៖</strong> <span id="warningText"></span>
+        </div>
+        
+        <div class="actions">
+            <button class="btn btn-primary" id="checkBtn">
+                <i class="fas fa-search"></i> ពិនិត្យភាពសុទ្ធភាសា
+            </button>
+            <button class="btn btn-secondary" id="separateBtn">
+                <i class="fas fa-filter"></i> ញែកភាសាចេញពីគ្នា
+            </button>
+            <button class="btn btn-warning" id="clearBtn">
+                <i class="fas fa-broom"></i> សម្អាតទាំងអស់
+            </button>
+        </div>
+        
+        <section class="features">
+            <h2><i class="fas fa-star"></i> លក្ខណៈពិសេស</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-ban feature-icon"></i> ហាមភាសាជាន់គ្នា</h3>
+                    <p>ធានាថាភាសានីមួយៗមិនលាយបញ្ចូលគ្នា ដោយកំណត់ពាក្យដែលមិនត្រូវបញ្ចូលក្នុងផ្នែកនីមួយៗ</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-check-circle feature-icon"></i> ពិនិត្យសុទ្ធភាពស្វ័យប្រវត្តិ</h3>
+                    <p>ពិនិត្យអត្ថបទដោយស្វ័យប្រវត្តិថាតើមានពាក្យភាសាផ្សេងលាយចូលឬទេ</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-filter feature-icon"></i> ញែកភាសាដោយស្វ័យប្រវត្តិ</h3>
+                    <p>អាចញែកពាក្យភាសាផ្សេងៗចេញពីអត្ថបទដែលលាយគ្នា និងដាក់វាត្រឡប់ទៅភាសាដើមវិញ</p>
+                </div>
+                <div class="feature-card">
+                    <h3><i class="fas fa-chart-bar feature-icon"></i> ស្ថិតិសុទ្ធភាព</h3>
+                    <p>បង្ហាញភាគរយសុទ្ធភាពនៃអត្ថបទ និងចំនួនពាក្យដែលបានលុបចេញ</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>វេបសាយញែកភាសា &copy; ២០២៣ | បង្កើតឡើងដើម្បីរក្សាភាពសុទ្ធនៃភាសានីមួយៗ</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">ឧបករណ៍នេះអាចប្រើបានសម្រាប់គ្រប់ភាសាទាំងអស់</p>
+    </footer>
+
+    <script>
+        // ព័ត៌មានភាសា
+        const languageData = {
+            khmer: { name: "ភាសាខ្មែរ", code: "ខ្មែរ", words: ["ខ្ញុំ", "អ្នក", "គាត់", "ពួកគេ", "យើង", "មាន", "ជា", "នៅ", "លើ", "ក្រោម", "ធ្វើ", "ដោយ", "អំពី", "ដែល", "របស់"] },
+            english: { name: "ភាសាអង់គ្លេស", code: "ENG", words: ["I", "you", "he", "she", "it", "we", "they", "have", "is", "are", "was", "were", "do", "by", "about", "the", "a", "an"] },
+            french: { name: "ភាសាបារាំង", code: "FRA", words: ["je", "tu", "il", "elle", "nous", "vous", "ils", "elles", "avoir", "être", "faire", "par", "sur", "dans", "avec", "pour"] },
+            spanish: { name: "ភាសាអេស្បាញ", code: "ESP", words: ["yo", "tú", "él", "ella", "nosotros", "vosotros", "ellos", "ellas", "tener", "ser", "estar", "hacer", "por", "para", "con", "sin"] },
+            chinese: { name: "ភាសាចិន", code: "中文", words: ["我", "你", "他", "她", "我们", "你们", "他们", "有", "是", "在", "的", "了", "和", "与", "为"] },
+            japanese: { name: "ភាសាជប៉ុន", code: "日本語", words: ["私", "あなた", "彼", "彼女", "私たち", "彼ら", "ある", "いる", "です", "は", "が", "を", "に", "で", "と"] },
+            korean: { name: "ភាសាកូរ៉េ", code: "한국어", words: ["나", "너", "그", "그녀", "우리", "그들", "있다", "이다", "에", "에서", "를", "을", "와", "과", "로"] },
+            thai: { name: "ភាសាថៃ", code: "ไทย", words: ["ฉัน", "คุณ", "เขา", "เธอ", "เรา", "พวกเขา", "มี", "เป็น", "อยู่", "ที่", "ใน", "บน", "กับ", "โดย"] }
+        };
+
+        // ធាតុ DOM
+        const language1Select = document.getElementById('language1');
+        const language2Select = document.getElementById('language2');
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+        const lang1Name = document.getElementById('lang1-name');
+        const lang2Name = document.getElementById('lang2-name');
+        const lang1Code = document.getElementById('lang1-code');
+        const lang2Code = document.getElementById('lang2-code');
+        const count1 = document.getElementById('count1');
+        const count2 = document.getElementById('count2');
+        const purity1 = document.getElementById('purity1');
+        const purity2 = document.getElementById('purity2');
+        const warningMessage = document.getElementById('warningMessage');
+        const warningText = document.getElementById('warningText');
+        const checkBtn = document.getElementById('checkBtn');
+        const separateBtn = document.getElementById('separateBtn');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // កំណត់ភាសាដំបូង
+        updateLanguageInfo();
+
+        // ការបន្ទាន់សម័យព័ត៌មានភាសា
+        language1Select.addEventListener('change', function() {
+            if (language1Select.value === language2Select.value) {
+                // ប្តូរភាសាទីពីរប្រសិនបើវាដូចគ្នា
+                for (let option of language2Select.options) {
+                    if (option.value !== language1Select.value) {
+                        language2Select.value = option.value;
+                        break;
+                    }
+                }
+            }
+            updateLanguageInfo();
+            updatePlaceholders();
+            checkPurity();
+        });
+
+        language2Select.addEventListener('change', function() {
+            if (language2Select.value === language1Select.value) {
+                // ប្តូរភាសាទីមួយប្រសិនបើវាដូចគ្នា
+                for (let option of language1Select.options) {
+                    if (option.value !== language2Select.value) {
+                        language1Select.value = option.value;
+                        break;
+                    }
+                }
+            }
+            updateLanguageInfo();
+            updatePlaceholders();
+            checkPurity();
+        });
+
+        // ពិនិត្យសុទ្ធភាពនៅពេលវាយបញ្ចូល
+        text1.addEventListener('input', function() {
+            updateWordCount(1);
+            checkPurity();
+        });
+
+        text2.addEventListener('input', function() {
+            updateWordCount(2);
+            checkPurity();
+        });
+
+        // ពិនិត្យសុទ្ធភាពភាសា
+        checkBtn.addEventListener('click', function() {
+            checkPurity(true);
+        });
+
+        // ញែកភាសាចេញពីគ្នា
+        separateBtn.addEventListener('click', function() {
+            separateLanguages();
+        });
+
+        // សម្អាតទាំងអស់
+        clearBtn.addEventListener('click', function() {
+            text1.value = '';
+            text2.value = '';
+            updateWordCount(1);
+            updateWordCount(2);
+            purity1.textContent = 'សុទ្ធភាព: 100%';
+            purity2.textContent = 'សុទ្ធភាព: 100%';
+            warningMessage.classList.remove('show');
+        });
+
+        // អនុគមន៍ធ្វើបច្ចុប្បន្នភាពព័ត៌មានភាសា
+        function updateLanguageInfo() {
+            const lang1 = language1Select.value;
+            const lang2 = language2Select.value;
+            
+            lang1Name.textContent = languageData[lang1].name;
+            lang2Name.textContent = languageData[lang2].name;
+            
+            lang1Code.textContent = languageData[lang1].code;
+            lang2Code.textContent = languageData[lang2].code;
+        }
+
+        // អនុគមន៍ធ្វើបច្ចុប្បន្នភាពកន្លែងដាក់អត្ថបទ
+        function updatePlaceholders() {
+            const lang1 = language1Select.value;
+            const lang2 = language2Select.value;
+            
+            text1.placeholder = `សូមវាយបញ្ចូលអត្ថបទជាភាសា${languageData[lang1].name}នៅទីនេះ...`;
+            text2.placeholder = `សូមវាយបញ្ចូលអត្ថបទជាភាសា${languageData[lang2].name}នៅទីនេះ...`;
+        }
+
+        // អនុគមន៍រាប់ពាក្យ
+        function updateWordCount(textAreaNum) {
+            const textArea = textAreaNum === 1 ? text1 : text2;
+            const countElement = textAreaNum === 1 ? count1 : count2;
+            
+            const text = textArea.value.trim();
+            const wordCount = text === '' ? 0 : text.split(/\s+/).length;
+            countElement.textContent = `${wordCount} ពាក្យ`;
+        }
+
+        // អនុគមន៍ពិនិត្យសុទ្ធភាពភាសា
+        function checkPurity(showWarning = false) {
+            const lang1 = language1Select.value;
+            const lang2 = language2Select.value;
+            
+            const text1Value = text1.value;
+            const text2Value = text2.value;
+            
+            // ពាក្យរបស់ភាសាទីមួយមិនត្រូវបញ្ចូលក្នុងភាសាទីពីរ
+            const lang1Words = languageData[lang1].words;
+            const lang2Words = languageData[lang2].words;
+            
+            // ពិនិត្យភាសាទីមួយ
+            let foreignWords1 = [];
+            let totalWords1 = text1Value.trim() === '' ? 0 : text1Value.split(/\s+/).length;
+            
+            if (totalWords1 > 0) {
+                const words1 = text1Value.split(/\s+/);
+                words1.forEach(word => {
+                    const cleanWord = word.replace(/[.,!?;:()\[\]{}'"-]/g, '').toLowerCase();
+                    if (cleanWord && lang2Words.some(langWord => langWord.toLowerCase() === cleanWord)) {
+                        foreignWords1.push(word);
+                    }
+                });
+            }
+            
+            // ពិនិត្យភាសាទីពីរ
+            let foreignWords2 = [];
+            let totalWords2 = text2Value.trim() === '' ? 0 : text2Value.split(/\s+/).length;
+            
+            if (totalWords2 > 0) {
+                const words2 = text2Value.split(/\s+/);
+                words2.forEach(word => {
+                    const cleanWord = word.replace(/[.,!?;:()\[\]{}'"-]/g, '').toLowerCase();
+                    if (cleanWord && lang1Words.some(langWord => langWord.toLowerCase() === cleanWord)) {
+                        foreignWords2.push(word);
+                    }
+                });
+            }
+            
+            // គណនាភាគរយសុទ្ធភាព
+            const purityPercent1 = totalWords1 === 0 ? 100 : Math.max(0, Math.round(((totalWords1 - foreignWords1.length) / totalWords1) * 100));
+            const purityPercent2 = totalWords2 === 0 ? 100 : Math.max(0, Math.round(((totalWords2 - foreignWords2.length) / totalWords2) * 100));
+            
+            purity1.textContent = `សុទ្ធភាព: ${purityPercent1}%`;
+            purity2.textContent = `សុទ្ធភាព: ${purityPercent2}%`;
+            
+            // បង្ហាញការព្រមានប្រសិនបើមាន
+            if (showWarning) {
+                let warning = "";
+                
+                if (foreignWords1.length > 0) {
+                    warning += `ភាសា${languageData[lang1].name}មានពាក្យពីភាសា${languageData[lang2].name} ${foreignWords1.length} ពាក្យ: ${foreignWords1.slice(0, 5).join(', ')}${foreignWords1.length > 5 ? '...' : ''}. `;
+                }
+                
+                if (foreignWords2.length > 0) {
+                    warning += `ភាសា${languageData[lang2].name}មានពាក្យពីភាសា${languageData[lang1].name} ${foreignWords2.length} ពាក្យ: ${foreignWords2.slice(0, 5).join(', ')}${foreignWords2.length > 5 ? '...' : ''}.`;
+                }
+                
+                if (warning) {
+                    warningText.textContent = warning;
+                    warningMessage.classList.add('show');
+                } else {
+                    warningMessage.classList.remove('show');
+                    alert("អត្ថបទទាំងពីរមានសុទ្ធភាពខ្ពស់! មិនមានភាសាជាន់គ្នាទេ។");
+                }
+            }
+            
+            return { foreignWords1, foreignWords2, purityPercent1, purityPercent2 };
+        }
+
+        // អនុគមន៍ញែកភាសាចេញពីគ្នា
+        function separateLanguages() {
+            const lang1 = language1Select.value;
+            const lang2 = language2Select.value;
+            
+            const text1Value = text1.value;
+            const text2Value = text2.value;
+            
+            // បញ្ចូលអត្ថបទទាំងពីរជាអត្ថបទតែមួយ
+            const combinedText = text1Value + " " + text2Value;
+            
+            if (!combinedText.trim()) {
+                alert("សូមបញ្ចូលអត្ថបទមុនពេលញែកភាសា!");
+                return;
+            }
+            
+            const lang1Words = languageData[lang1].words;
+            const lang2Words = languageData[lang2].words;
+            
+            // បំបែកអត្ថបទទៅជាពាក្យ
+            const allWords = combinedText.split(/\s+/);
+            
+            let separatedLang1 = [];
+            let separatedLang2 = [];
+            let unknownWords = [];
+            
+            allWords.forEach(word => {
+                const cleanWord = word.replace(/[.,!?;:()\[\]{}'"-]/g, '').toLowerCase();
+                let assigned = false;
+                
+                // ពិនិត្យប្រសិនបើជាពាក្យភាសាទីមួយ
+                if (lang1Words.some(langWord => langWord.toLowerCase() === cleanWord)) {
+                    separatedLang1.push(word);
+                    assigned = true;
+                }
+                
+                // ពិនិត្យប្រសិនបើជាពាក្យភាសាទីពីរ
+                if (lang2Words.some(langWord => langWord.toLowerCase() === cleanWord)) {
+                    separatedLang2.push(word);
+                    assigned = true;
+                }
+                
+                // ប្រសិនបើមិនត្រូវនឹងភាសាណាមួយ
+                if (!assigned) {
+                    unknownWords.push(word);
+                }
+            });
+            
+            // ដាក់ពាក្យដែលមិនស្គាល់ទៅក្នុងផ្នែកទាំងពីរ (សម្រាប់ឧទាហរណ៍)
+            separatedLang1 = separatedLang1.concat(unknownWords.slice(0, Math.ceil(unknownWords.length / 2)));
+            separatedLang2 = separatedLang2.concat(unknownWords.slice(Math.ceil(unknownWords.length / 2)));
+            
+            // ធ្វើបច្ចុប្បន្នភាពអត្ថបទ
+            text1.value = separatedLang1.join(' ');
+            text2.value = separatedLang2.join(' ');
+            
+            // ធ្វើបច្ចុប្បន្នភាពការរាប់ពាក្យនិងសុទ្ធភាព
+            updateWordCount(1);
+            updateWordCount(2);
+            checkPurity(true);
+            
+            alert(`បានញែកភាសាដោយជោគជ័យ! រកឃើញ ${separatedLang1.length} ពាក្យសម្រាប់ភាសា${languageData[lang1].name} និង ${separatedLang2.length} ពាក្យសម្រាប់ភាសា${languageData[lang2].name}`);
+        }
+
+        // ធ្វើបច្ចុប្បន្នភាពការរាប់ពាក្យដំបូង
+        updateWordCount(1);
+        updateWordCount(2);
+    </script>
+</body>
+</html>
